@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendFileMail;
 use App\Models\File;
+use App\Models\Groupe;
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class FileController extends Controller
@@ -31,7 +35,10 @@ class FileController extends Controller
                 $file_size = $image->getSize();
                 $filePath = $image->storeAs('file', $file_path, 'public');
             }
+
             $user = User::findOrFail(auth()->id());
+            $group = Groupe::findOrFail($groupId);
+            $users_id = Member::where('group_id', $groupId)->pluck('user_id');
 
             $data = [
                 'file_name' => $file_name,
@@ -43,6 +50,23 @@ class FileController extends Controller
             ];
 
             $fileData = File::create($data);
+
+
+            if ($fileData) {
+                foreach ($users_id as $id) {
+                    $user = User::findOrFail($id);
+
+                    Mail::to($user->email)->send(
+                        new SendFileMail(
+                            $user->name,
+                            $user->email,
+                            $group->name,
+                            $file_name,
+                            $file_size
+                        )
+                    );
+                }
+            }
 
             return response()->json([
                 $fileData,

@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -16,7 +17,13 @@ class SendFileMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(
+        private $name, 
+        private $email, 
+        private $Group_name,
+        private $file_name,
+        private $file_size
+        )
     {
         //
     }
@@ -27,7 +34,8 @@ class SendFileMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send File Mail',
+            subject: 'Seph chat',
+            from: new Address('accounts@unetah.net', 'Mail of Seph chat')
         );
     }
 
@@ -37,7 +45,14 @@ class SendFileMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.send_file_mail',
+            with: [
+                'name' => $this->name,
+                'email' => $this->email,
+                'Group_name' => $this->Group_name,
+                'file_name' => $this->file_name,
+                'file_size' => $this->file_size
+            ]
         );
     }
 

@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -16,7 +17,7 @@ class InvitationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(private $email, private $Group_name)
     {
         //
     }
@@ -26,8 +27,12 @@ class InvitationMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        // return new Envelope(
+        //     subject: 'Invitation Mail',
+        // );
         return new Envelope(
-            subject: 'Invitation Mail',
+            subject: 'Seph chat',
+            from: new Address('accounts@unetah.net', 'Mail of Seph chat')
         );
     }
 
@@ -37,7 +42,12 @@ class InvitationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.invitation_mail',
+            with: [
+                'email' => $this->email,
+                'Group_name' => $this->Group_name,
+                'url' => 'Lien d\'inscription',
+            ]
         );
     }
 

@@ -17,6 +17,11 @@ class MemberController extends Controller
 {
     //
 
+    public function showUers()
+    {
+        return User::all();
+    }
+
     public function addMember($user_id, $group_id)
     {
         $data = [

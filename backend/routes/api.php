@@ -21,12 +21,13 @@ Route::prefix('v1.0.0')->group(function () {
     Route::middleware(['auth:sanctum'])->group( function () {
         Route::get('readGroup', action: [GroupeController::class, 'index']);
         Route::get('show_file/{groupId}', action: [FileController::class, 'show_file']);
+        Route::get('showUers', action: [MemberController::class, 'showUers']);
 
         Route::post('create', action: [GroupeController::class, 'create']);
-        Route::post('addMember/{user_id}/{group_id}', action: [MemberController::class, 'addMember']);
         Route::post('invitation/{group_id}', action: [MemberController::class, 'invitation']);
         Route::post('send_file/{group_id}', action: [FileController::class, 'store']);
-
+        
+        Route::post('addMember/{user_id}/{group_id}', action: [MemberController::class, 'addMember']);
     });
 
 });

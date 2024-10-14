@@ -1,0 +1,147 @@
+.center_css {
+    height: 100vh;
+    /* background-color: rgba(0, 0, 255, 0.301); */
+    width: 500px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: end;
+    border-width: 0 2px;
+    border-color: black;
+    border-style: solid;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.group_infos {
+    padding: 15px 50px;
+    background-color: chartreuse;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    /* position: fixed; */
+}
+
+h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.top_css {
+    /* position: fixed; */
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    background-color: white;
+    /* border-radius: 20px; */
+    /* left: 450px; */
+    /* padding-right: 15px; */
+}
+
+.file_zone {
+    /* background-color: #dc1818; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style: none;
+    text-align: left;
+}
+
+li {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.icones:hover {
+    font-size: 30px;
+    color: blue;
+    cursor: pointer;
+}
+
+.icones {
+    position: relative;
+    top: 6px;
+}
+
+.zone_zero {
+    height: 100px;
+    width: 100%;
+}
+
+.file_container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin-right: 10px;
+}
+
+.file_container2 {
+    text-align: left;
+    background-color: cornflowerblue;
+    border-radius: 20px;
+    padding: 15px;
+    width: auto;
+    max-width: 400px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader1 {
+    width: 40px;
+    aspect-ratio: 1;
+     --c: linear-gradient(#000 0 0);
+     --m: radial-gradient(farthest-side,#000 92%,#0000);
+    background: 
+      var(--m) center               /12px 12px,
+      var(--c) left 50% top    -20px/8px 16px, 
+      var(--c) left 50% bottom -20px/8px 16px, 
+      var(--c) top  50% left   -20px/16px 8px, 
+      var(--c) top  50% right  -20px/16px 8px;
+    background-repeat: no-repeat;
+    animation: 
+      l18-1 1.5s infinite,
+      l18-2 1.5s infinite;
+  }
+  @keyframes l18-1 {
+    30%,
+    70% {background-position: 
+          center,
+          left 50% top    calc(50% - 8px),
+          left 50% bottom calc(50% - 8px),
+          top  50% left   calc(50% - 8px),
+          top  50% right  calc(50% - 8px)}
+  }
+  @keyframes l18-2 {
+    0%,40%   {transform: rotate(0)}
+    60%,100% {transform: rotate(90deg)}
+  }
+
+/* HTML: <div class="loader"></div> */
+.loader2 {
+    width: 60px;
+    aspect-ratio: 1;
+    background: linear-gradient(#dc1818 0 0) bottom/100% 0% no-repeat #ccc;
+    -webkit-mask: 
+      radial-gradient(circle at 60% 65%, #000 62%, #0000 65%) top left, 
+      radial-gradient(circle at 40% 65%, #000 62%, #0000 65%) top right, 
+      linear-gradient(to bottom left, #000 42%,#0000 43%) bottom left , 
+      linear-gradient(to bottom right,#000 42%,#0000 43%) bottom right;
+    -webkit-mask-size: 50% 50%;
+    -webkit-mask-repeat: no-repeat;
+    animation: l19 2s infinite linear;
+  }
+  @keyframes l19 {
+      90%,100% {background-size:100% 100%}
+  }

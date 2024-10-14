@@ -22,6 +22,15 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'password_confirmation' => 'same:password',
+        ], [
+            // Messages personnalisés
+            'name.required' => 'Le nom est obligatoire.',
+            'email.required' => 'L\'adresse e-mail est obligatoire.',
+            'email.email' => 'L\'adresse e-mail doit être valide.',
+            'email.unique' => 'Cette adresse e-mail est déjà utilisée.',
+            'password.required' => 'Le mot de passe est obligatoire.',
+            'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+            'password_confirmation.same' => 'La confirmation du mot de passe ne correspond pas.',
         ]);
 
         try {
@@ -39,13 +48,13 @@ class AuthController extends Controller
 
             if ($check_invitation->count() > 0) {
                 foreach ($check_invitation as $groupId) {
-                    Member::create(['user_id' => $user->id,'group_id'=> $groupId]);
+                    Member::create(['user_id' => $user->id, 'group_id' => $groupId]);
                     $invite = Invitation::where('email', $request->email)->first();
                     $invite->delete();
                 }
             }
 
-            return response()->json($user, 201);
+            return response()->json(['user' => $user, 'success' => true], 201);
         } catch (\Throwable $th) {
             //throw $th;
             return $th;
@@ -64,12 +73,14 @@ class AuthController extends Controller
 
         if (!$user)
             return response()->json([
-                'message' => 'Email incorrecte!'
+                'message' => 'Email incorrecte!',
+                'success' => false
             ], 401);
 
         if (!Hash::check($data['password'], $user->password))
             return response()->json([
-                'message' => 'Mot de passe incorrecte!'
+                'message' => 'Mot de passe incorrecte!',
+                'success' => false
             ], 401);
         // $user = Auth::user();
         $user->tokens()->delete();
@@ -77,6 +88,7 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $user->token,
+            'success' => true,
             'user' => $user,
             'message' => 'Connexion reussie'
         ], 200);

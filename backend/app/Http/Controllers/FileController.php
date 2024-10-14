@@ -16,7 +16,7 @@ class FileController extends Controller
     public function store(Request $request, $groupId)
     {
         $validator = Validator::make($request->all(), [
-            'file' => 'required|image|mimes:jpeg,png,jpg,pdf,docx,doc,txt,zip|max:1048',
+            'file' => 'required|mimes:jpeg,png,exe,jpg,pdf,docx,doc,txt,zip|max:10048',
         ]);
 
         try {

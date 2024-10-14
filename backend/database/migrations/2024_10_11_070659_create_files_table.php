@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('file_size');
             $table->string('sender_name');
 
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('group_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('group_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('group_id')->references('id')->on('groupes')->onDelete('cascade');

@@ -181,7 +181,7 @@ export default function CenterBox({ groupSelection, refresh, setRefresh }) {
                             }}>Aucun fichier dans ce groupe</div>
                         )
                     ) : (
-                        <div className='loading'><div className='loader2'></div></div>
+                        <div className='loading'><div className='loader3'></div></div>
                     )
                 }
             </div>

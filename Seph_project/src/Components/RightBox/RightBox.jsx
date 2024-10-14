@@ -33,7 +33,7 @@ export default function RightBox({ groupSelection }) {
         setTimeout(function () {
             if (!isLoading_add) {
                 setIsLoading_add(() => false);
-                toast.error('erreur lors de l\'envoie de l\'invitation');
+                // toast.error('erreur lors de l\'envoie de l\'invitation');
             }
         }, 10000);
 
